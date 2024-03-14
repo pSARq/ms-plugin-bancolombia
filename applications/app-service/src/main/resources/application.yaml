@@ -3,21 +3,28 @@ server:
 spring:
   application:
     name: "notification"
-  devtools:
-    add-properties: false
-  h2:
-    console:
-      enabled: true
-      path: "/h2"
-  profiles:
-    include: null
-commons:
-  jms:
-    input-concurrency: 10
-    input-queue: "DEV.QUEUE.2"
-    input-queue-alias: ""
-    reactive: true
-ibm:
-  mq:
-    channel: "DEV.APP.SVRCONN"
-    user: "app"
+#  profiles:
+#    include: "local"
+  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+    addresses: "amqp://guest:guest@localhost:5672"
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 1
+    template:
+      retry:
+        enabled: true
+        initial-interval: 5s
+        maxAttempts: 3
+        maxInterval: 10s
+        multiplier: 2
+    queue:
+      prueba: "cola-de-prueba"
+    exchange:
+      prueba: "prueba"
+    routing-key:
+      prueba: "routing-key"

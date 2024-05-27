@@ -10,6 +10,8 @@ spring:
 #    port: 5672
 #    username: guest
 #    password: guest
+#    ssl:
+#      enabled: true
     addresses: "amqp://guest:guest@localhost:5672"
     virtual-host: /
     listener:
